@@ -1,0 +1,36 @@
+schema_version: 1
+name: PseudOS
+id: pseudos
+version: "0.1.0"
+base: ubuntu
+desktop: xfce
+apps:
+  - firefox
+  - vlc
+  - libreoffice
+  - thunderbird
+branding:
+  wallpaper: assets/pseudos-wallpaper.png
+  logo: assets/pseudos-logo.png
+  accent_color: "#29D6C5"
+settings:
+  language: en_US
+  keyboard: us
+  hostname: pseudos
+  autologin: false
+packages:
+  - linux-firmware
+  - gnome-calculator
+  - synaptic
+  - geany
+  - git
+  - htop
+  - curl
+  - wget
+  - zip
+  - unzip
+  - python3-venv
+persistence: true
+scripts:
+  first-login:
+    - scripts/first-login.sh
