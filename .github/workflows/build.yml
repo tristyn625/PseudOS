@@ -19,7 +19,7 @@ jobs:
       - name: Install build tools
         run: |
           sudo apt-get update
-          sudo apt-get install --yes live-build debootstrap xorriso squashfs-tools
+          sudo apt-get install --yes live-build debootstrap xorriso squashfs-tools debian-archive-keyring
 
       - name: Configure and build PseudOS
         run: |
@@ -27,11 +27,16 @@ jobs:
           cd build
 
           sudo lb config \
+            --ignore-system-defaults \
+            --mode debian \
             --distribution trixie \
             --architecture amd64 \
             --binary-images iso-hybrid \
             --debian-installer none \
-            --archive-areas "main" \
+            --archive-areas main \
+            --mirror-bootstrap https://deb.debian.org/debian/ \
+            --mirror-chroot https://deb.debian.org/debian/ \
+            --mirror-binary https://deb.debian.org/debian/ \
             --bootappend-live "boot=live components"
 
           sudo lb build
